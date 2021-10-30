@@ -1,0 +1,3 @@
+[submodule "myvector"]
+	path = myvector
+	url = https://github.com/SSemenkin/myvector
