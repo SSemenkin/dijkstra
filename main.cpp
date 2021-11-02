@@ -2,8 +2,10 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <map>
+#include <numeric>
 
-
+const auto maxValue = std::numeric_limits<int>::max();
 
 struct Edge {
     int m_distance;
@@ -24,6 +26,12 @@ public:
 
     void setVertexes(const std::vector<Vertex> &vertexes) {
         m_vertexes = vertexes;
+        m_distances.clear();
+
+        for (const Vertex& vertex : m_vertexes) {
+            m_distances[vertex.m_id] = maxValue;
+        }
+        calcDistances();
     }
 
     friend std::ostream& operator<< (std::ostream& stream, const Graph &graph) {
@@ -50,6 +58,18 @@ public:
 
 private:
     std::vector<Vertex> m_vertexes;
+    std::map<int, int> m_distances;
+private:
+    void calcDistances() {
+
+        std::map<int, int> visited;
+
+        for (;;) {
+
+
+            if (visited.empty()) break;
+        }
+    }
 };
 
 Graph readGraphFromFile(const std::string &path)
@@ -83,10 +103,10 @@ Graph readGraphFromFile(const std::string &path)
 
             if (pos == vertexes.end()) {
                 std::cout << "Not find vertex with id " << vertexId;
+            } else {
+                (*pos).m_edges.push_back(edge);
+
             }
-
-
-            (*pos).m_edges.push_back(edge);
         }
         graph.setVertexes(vertexes);
 
